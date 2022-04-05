@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <h1>Hello, world!</h1>
+    <input type="text" id="textHolder" placeholder="Enter some text" />
+    <input type="text" id="fileName" placeholder="Enter file name" />
+    <button onclick="downloadFile()">Download</button>
+    <script>
+      function downloadFile() {
+        var text = document.getElementById("textHolder").value;
+        var fileName = document.getElementById("fileName").value;
+        var file = new Blob([text], { type: "text/plain" });
+        var fileURL = URL.createObjectURL(file);
+        var a = document.createElement("a");
+        a.href = fileURL;
+        a.download = fileName;
+        a.click();
+      }
+    </script>
+  </body>
+</html>
