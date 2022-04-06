@@ -26,8 +26,10 @@
       <small class="display-4 text-muted">Where you conver text to text</small>
     </h1>
       <div class="pb-2 row">
-        <div class="col-md-6 col-sm-6"><input class="form-control" type="text" id="fileName" placeholder="Enter file name"/></div>
-        <div class="col-md-6 col-sm-6"><button onclick="downloadFile()" class="btn btn-dark">Download</button></div>
+        <div class="col-md-3"><input class="form-control" type="text" id="fileName" placeholder="Enter file name"/></div>
+        <div class="col-xs-3"><button onclick="downloadFile()" class="btn btn-outline-primary">Download</button></div>
+        <div class="pl-3 col-xs-3"><button onclick="clearFile()" class="float-right btn btn-outline-primary">Clear</button></div>
+        <div class="pl-3 col-xs-3"><input class="form-control form-control-md" type="file" id="file" onchange="readFile()"/></div>
       </div>
       <textarea class="col fill" form-control" type="text" id="textHolder" placeholder="Type any text"></textarea>
 
@@ -42,6 +44,23 @@
         a.href = fileURL;
         a.download = fileName;
         a.click();
+      }
+
+      function clearFile() {
+        document.getElementById("textHolder").value = "";
+      }
+
+      // Reads the file and puts it in the text area
+      function readFile() {
+        var file = document.getElementById("file").files[0];
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function(e) {
+          document.getElementById("textHolder").value = e.target.result;
+        };
+        reader.onerror = function(e) {
+          console.log("Error: ", e);
+        };
       }
     </script>
   </body>
