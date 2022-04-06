@@ -13,23 +13,35 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="icon" href="ico.png">
   </head>
   <style>
     .fill {
     min-height: 77vh;
     height: 100%;
     }
+    
+    #textHolder {
+      font-size: 18px;
+      padding-top: 10px;
+    }
+    body {
+      background: #ECE9E6;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
   </style>
   <body class="p-4 mx-auto">
     <h1 class="display-2">
       Text to Text
-      <small class="display-4 text-muted">Where you conver text to text</small>
+      <small class="display-4 text-muted">Where you convert text to text</small>
     </h1>
       <div class="pb-2 row">
         <div class="col-md-3"><input class="form-control" type="text" id="fileName" placeholder="Enter file name"/></div>
         <div class="col-xs-3"><button onclick="downloadFile()" class="btn btn-outline-primary">Download</button></div>
-        <div class="pl-3 col-xs-3"><button onclick="clearFile()" class="float-right btn btn-outline-primary">Clear</button></div>
-        <div class="pl-3 col-xs-3"><input class="form-control form-control-md" type="file" id="file" onchange="readFile()"/></div>
+        <div class="pl-3 col-xs-3"><button onclick="clearFile()" class="btn btn-outline-primary">Clear</button></div>
+        <div class="pl-3 col-xs-3"><input type="file" id="file" onchange="readFile()"/></div></div></div></div>
       </div>
       <textarea class="col fill" form-control" type="text" id="textHolder" placeholder="Type any text"></textarea>
 
@@ -47,10 +59,12 @@
       }
 
       function clearFile() {
-        document.getElementById("textHolder").value = "";
+        confirm = window.prompt("are you sure? yes/no")
+        if (confirm == "yes") {
+          document.getElementById("textHolder").value = "";
+        } 
       }
 
-      // Reads the file and puts it in the text area
       function readFile() {
         var file = document.getElementById("file").files[0];
         var reader = new FileReader();
